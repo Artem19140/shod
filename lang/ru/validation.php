@@ -200,6 +200,10 @@ return [
     'attributes' => [
         'type' => 'тип',
         'report' => 'отчет',
+        'name' => 'название',
+        'organization' => 'организация',
+        'password' => 'пароль',
+        'login' => 'логин'
     ],
 
 ];

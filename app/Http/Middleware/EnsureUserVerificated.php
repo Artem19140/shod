@@ -15,9 +15,9 @@ class EnsureUserVerificated
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if(! $request->user()->isVerified()){
-        //     abort(404);
-        // }
+        if(! $request->user()->isVerified()){
+            abort(404);
+        }
         
         return $next($request);
     }

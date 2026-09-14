@@ -19,17 +19,29 @@ class LoginController extends Controller
 
         $response = $this->requestUdsu($request->login, $request->password);
         $employeeXml = $this->parseXml($response);
-        $employee = $this->findOrCreateEmployee($employeeXml);
-        
-        if(! $employee->isVerified()){ //Убрать !
-            Auth::login($employee);
-            $request->session()->regenerate();
-            return redirect()->route('reports.index');
+
+        if(
+            $this->employeeNotWork($employeeXml) 
+                && 
+            app()->isProduction()
+        ){
+            return back()->withErrors([
+                'login' => 'Неверные учетные данные'
+            ]);
         }
 
-        return back()->withErrors([
-            'login' => 'Ожидайте подтверждения доступа админом'
-        ]);
+        $employee = $this->findOrCreateEmployee($employeeXml);
+        
+        if(! $employee->isVerified()){
+            return back()->withErrors([
+                'login' => 'Ожидайте подтверждения доступа админом'
+            ]);
+        }
+
+        Auth::login($employee);
+        $request->session()->regenerate();
+        return redirect()->route('reports.index');
+        
     }
 
     protected function requestUdsu(string $login, string $password)

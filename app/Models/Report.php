@@ -12,7 +12,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'user_id', 
     'is_verified', 
     'original_file_name',
-    'type'
+    'type',
+    'deleted_at',
+    'organization_id'
 ])]
 class Report extends Model
 {
@@ -29,5 +31,10 @@ class Report extends Model
             'annual' => 'Годовой',
             'adhoc' => 'Внеплановый',
         ];
+    }
+
+    public function organization():BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
     }
 }

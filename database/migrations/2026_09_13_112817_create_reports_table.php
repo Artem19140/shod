@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string('path');
             $table->integer('size');
             $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Organization::class);
             $table->string('original_file_name');
             $table->string('type');
             $table->dateTime('deleted_at')->nullable()->default(null);

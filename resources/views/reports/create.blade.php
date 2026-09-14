@@ -13,12 +13,12 @@
     >
         <x-card>
             <div class="flex flex-col gap-4">
-            
+                
                 <h1 class="text-2xl font-bold text-center">
                     Загрузка отчета
                 </h1>
-                <div>
-
+                <div class="input-container">
+                    <label for="report" class="input-label">Отчет</label>
                     <input
                         type="file"
                         name="report"
@@ -38,18 +38,21 @@
                     @enderror
                 </div>
 
-                <div>
-                    <label for="type" class="text-gray-500 text-sm">Тип</label>
+                <div class="input-container">
+                    <label for="type" class="input-label">Тип</label>
                     <select
                         name="type"
                         id="type"
-                        class="w-full rounded-md border border-gray-200
-                            bg-white p-3 text-sm text-gray-600
-                            focus:border-gray-300 focus:outline-none cursor-pointer"
+                        class="select"
                     >
                         <option value="">Выберите тип</option>
                         @foreach ($types as $type => $label)
-                            <option value="{{ $type }}" @selected(old('type') === $type)>{{$label}}</option>
+                            <option 
+                                value="{{ $type }}" 
+                                @selected(old('type') === $type)
+                            >
+                                {{$label}}
+                            </option>
                         @endforeach
                     </select>
 
@@ -60,19 +63,22 @@
                     @enderror
                 </div>
 
-                <div>
-                    <label for="type" class="text-gray-500 text-sm">Получатель</label>
+                <div class="input-container">
+                    <label for="organization" class="input-label">Для кого</label>
                     <select
-                        name="recipient"
-                        id="recipient"
-                        class="w-full rounded-md border border-gray-200
-                            bg-white p-3 text-sm text-gray-600
-                            focus:border-gray-300 focus:outline-none cursor-pointer"
-                        value
+                        name="organization"
+                        id="organization"
+                        class="select"
                     >
-                        <option value="">Выберите получателя</option>
-                        <option value="1">Отдел продаж</option>
-                        
+                        <option value="">Выберите организацию</option>
+                        @foreach ($organizations as $organization)
+                            <option 
+                                value="{{ $organization->id }}" 
+                                @selected((int)old('organization') === $organization->id)
+                            >
+                                {{ $organization->name }}
+                            </option>
+                        @endforeach
                     </select>
 
                     @error('recipient')
@@ -81,9 +87,9 @@
                         </span>
                     @enderror
                 </div>
-                <x-button
-                    label="Загрузить"
-                />
+                <button type="submit" class="btn">
+                    Загрузить
+                </button>
 
                 <a
                     href="{{ route('reports.index') }}"

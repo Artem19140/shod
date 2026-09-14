@@ -57,7 +57,7 @@ $headers = [
                                             class="sr-only peer"
                                             name="is_verified"
                                             onchange="this.form.submit()"
-                                            {{ $user->isVerified() ? 'checked' : '' }}
+                                            {{ $user->is_verified ? 'checked' : '' }}
                                         >
 
                                         <div class="relative w-11 h-6 bg-gray-200 rounded-full
@@ -80,9 +80,7 @@ $headers = [
                         </tr>
                         @endforeach
                     @endif
-                    
-                </tbody> 
-                
+                </tbody>  
             </table>
             @if (count($users ?? []) === 0)
                 <div class="text-center mt-8">Отчеты не найдены.</div>

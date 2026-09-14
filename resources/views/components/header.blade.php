@@ -1,7 +1,6 @@
 <header class="border-b border-gray-200">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
 
-        {{-- Навигация --}}
         <nav class="flex items-center gap-1">
             @if (auth()->user()->isAdmin())
                 <a
@@ -20,6 +19,15 @@
                            {{ request()->routeIs('users.*') ? 'bg-gray-100 text-gray-900' : '' }}"
                 >
                     Сотрудники
+                </a>
+
+                <a
+                    href="{{ route('organizations.index') }}"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-600
+                           transition hover:bg-gray-100 hover:text-gray-900
+                           {{ request()->routeIs('organizations.*') ? 'bg-gray-100 text-gray-900' : '' }}"
+                >
+                    Организации
                 </a>
             @endif
         </nav>

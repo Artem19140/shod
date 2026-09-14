@@ -17,24 +17,31 @@
                     Вход
                 </h1>
 
-                <x-input 
-                    label="Логин"
-                    name="login"
-                    value="{{ old('login') ?? 'studman2' }}"
-                    :error="$errors->first('login')"
-                />
+                <div class="input-container">
+                    <label class="input-label">Логин</label>
+                    <input 
+                        name="login"
+                        value="{{ old('login') ?? 'studman2' }}"
+                        class="input"
+                    >
+                    <span class="error-validation">{{ $errors->first('login') }}</span>
+                </div>
 
-                <x-input 
-                    label="Пароль"
-                    type="password"
-                    name="password"
-                    value="{{ old('password') ?? 'straus' }}"
-                    :error="$errors->first('password')"
-                />
+                <div class="input-container">
+                    <label class="input-label">Пароль</label>
+                    <input 
+                        name="password"
+                        value="{{old('password') ?? 'straus' }}"
+                        class="input"
+                        type="password"
+                    >
+                    <span class="error-validation">{{ $errors->first('password') }}</span>
+                </div>
 
-                <x-button
-                    label="Войти"
-                />
+                <button
+                    type="submit"
+                    class="btn" 
+                >Войти</button>
 
             </div>
         </x-card>

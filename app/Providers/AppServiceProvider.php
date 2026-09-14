@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use App\View\Components\Button;
+use App\Models\User;
 use App\View\Components\Card;
-use App\View\Components\Input;
+use App\View\Components\FiltersReports;
 use App\View\Components\Header;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -24,9 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::component('input', Input::class);
         Blade::component('card', Card::class);
-        Blade::component('button', Button::class);
         Blade::component('header', Header::class);
+        Blade::component('filters-reports', FiltersReports::class);
+        if(! app()->isProduction()){
+            Model::shouldBeStrict();
+        }
+
+        Gate::define('admin', function (User $user) {
+        return $user->isAdmin();
+    });
     }
 }

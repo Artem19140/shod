@@ -10,6 +10,7 @@ $headers = [
     'Тип',
     'Размер',
     'Автор',
+    'Для кого',
     'Дата загрузки',
     'Действия'
 ]
@@ -21,7 +22,14 @@ $headers = [
     
         <div class="pb-4">
             <div class="flex items-center justify-between">
-                <div>Отчеты</div>
+                <div class="flex items-center gap-4">
+                    <div>Отчеты</div>
+                    <x-filters-reports
+                        :organizations="$organizations"
+                        :types="$types "
+                        :users="$users"
+                    />
+                </div>
                 <a
                     href="{{ route('reports.create') }}"
                     class="inline-block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
@@ -58,6 +66,10 @@ $headers = [
 
                             <td class="px-4 py-4 font-medium text-gray-900">
                                 {{ $report->user->fullName() }}
+                            </td>
+
+                            <td class="px-4 py-4 font-medium text-gray-900">
+                                {{ $report->organization->name }}
                             </td>
 
                              <td class="px-4 py-4 font-medium text-gray-900">
