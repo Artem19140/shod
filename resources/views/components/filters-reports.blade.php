@@ -61,6 +61,7 @@
                     action="{{ url()->current() }}"
                     class="space-y-5 p-6"
                 >
+                    @csrf
                     <div class="input-container">
                         <label
                             for="type"

@@ -11,6 +11,7 @@
         class="flex items-center justify-center"
         enctype="multipart/form-data"
     >
+        @csrf
         <x-card>
             <div class="flex flex-col gap-4">
                 

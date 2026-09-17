@@ -10,6 +10,7 @@
         action="/login"
         class="flex items-center justify-center min-h-screen"
     >
+        @csrf
         <x-card>
             <div class="flex flex-col gap-4 w-75">
             

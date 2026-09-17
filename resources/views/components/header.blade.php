@@ -40,6 +40,7 @@
                 action="{{ route('logout') }}"
                 onsubmit="return confirm('Вы уверены, что хотите выйти?')"
             >
+                @csrf
                 <button type="submit">
                     <x-heroicon-o-arrow-right-on-rectangle class="h-6 text-grey-500 cursor-pointer" />
                 </button>

@@ -87,6 +87,7 @@ $headers = [
                                             action="{{ route('reports.destroy', ['report'=> $report]) }}"
                                             onsubmit="return confirm('Вы уверены, что хотите удалить отчет?')"
                                         >
+                                            @csrf
                                             @method('DELETE')
                                             <button type="submit">
                                                 <x-heroicon-o-trash class="h-6 text-red-500 cursor-pointer" />
