@@ -15,6 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(
             at: ['10.0.0.0/8']
         );
+
+        $middleware->redirectUsersTo('/reports');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
