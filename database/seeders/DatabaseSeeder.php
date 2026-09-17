@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     use WithoutModelEvents;
     public function run(): void
     {
-        User::factory()->create([
+        User::create([
             'surname' => 'admin',
             'name' => 'admin',
             'patronymic' => 'admin',
