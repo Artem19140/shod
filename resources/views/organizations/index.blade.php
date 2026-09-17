@@ -23,6 +23,7 @@
                     <tr>
                         <th scope="col" class="px-4 py-3 font-medium">№</th>
                         <th scope="col" class="px-4 py-3 font-medium">Название</th>
+                        <th scope="col" class="px-4 py-3 font-medium"></th>
                     </tr>
                 </thead>
                     
@@ -37,6 +38,19 @@
 
                             <td class="px-4 py-4 font-medium text-gray-900">
                                 {{ $organization->name }}
+                            </td>
+
+                            <td class="px-4 py-4 font-medium text-gray-900">
+                                <form
+                                    method="POST"
+                                    action="{{ route('organizations.destroy', ['organization'=> $organization]) }}"
+                                    onsubmit="return confirm('Вы уверены, что хотите удалить организацию?')"
+                                >
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        <x-heroicon-o-trash class="h-6 text-red-500 cursor-pointer" />
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

@@ -7,6 +7,7 @@ use App\Http\Middleware\EnsureUserVerificated;
 use App\Models\Organization;
 use App\Models\Report;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -60,7 +61,7 @@ Route::middleware([
 ])->group(function() {
     Route::get('organizations', function() {
         return view('organizations.index', [
-            'organizations' => Organization::all()
+            'organizations' => Organization::whereNull('deleted_at')->get()
         ]);
     })->name('organizations.index');
 
@@ -70,6 +71,13 @@ Route::middleware([
     Route::get('organizations/create', function(){
         return view('organizations.create'); 
     })->name('organizations.create');
+
+    Route::delete('organizations/{organization}', function(Organization $organization){
+        $organization->update([
+           'deleted_at' => Carbon::now()
+        ]);
+        return redirect()->route('organizations.index'); 
+    })->name('organizations.destroy');
 
     Route::get('users',function () {
         return view('users.index', [

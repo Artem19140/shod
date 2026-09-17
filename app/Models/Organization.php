@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 
 #[Fillable([
-    'name'
+    'name',
+    'deleted_at'
 ])]
 class Organization extends Model
 {

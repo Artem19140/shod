@@ -44,7 +44,7 @@ class ReportController extends Controller
             
         return view('reports.index', [
             'reports' => $reports,
-            'organizations' => Organization::all(),
+            'organizations' => Organization::whereNull('deleted_at')->get(),
             'types' => Report::types(),
             'users' => User::all()
         ]);
@@ -54,7 +54,7 @@ class ReportController extends Controller
     {
         return view('reports.create', [
             'types' => Report::types(),
-            'organizations' => Organization::all()
+            'organizations' => Organization::whereNull('deleted_at')->get()
         ]);
     }
 

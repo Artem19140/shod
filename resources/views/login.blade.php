@@ -21,7 +21,7 @@
                     <label class="input-label">Логин</label>
                     <input 
                         name="login"
-                        value="{{ old('login') ?? 'studman2' }}"
+                        value="{{ old('login') }}"
                         class="input"
                     >
                     <span class="error-validation">{{ $errors->first('login') }}</span>
@@ -31,7 +31,6 @@
                     <label class="input-label">Пароль</label>
                     <input 
                         name="password"
-                        value="{{old('password') ?? 'straus' }}"
                         class="input"
                         type="password"
                     >

@@ -18,8 +18,16 @@ class LoginController extends Controller
         ]);
 
         $response = $this->requestUdsu($request->login, $request->password);
-        $employeeXml = $this->parseXml($response);
+        
+        $responseXml = $this->parseXml($response);
 
+        if(!\intval($responseXml->pers_id)){
+            return back()->withErrors([
+                'login' => 'Неверные учетные данные'
+            ])->withInput();
+        }
+
+        $employeeXml = $responseXml;
         if(
             $this->employeeNotWork($employeeXml) 
                 && 
@@ -27,7 +35,7 @@ class LoginController extends Controller
         ){
             return back()->withErrors([
                 'login' => 'Неверные учетные данные'
-            ]);
+            ])->withInput();
         }
 
         $employee = $this->findOrCreateEmployee($employeeXml);
@@ -35,7 +43,7 @@ class LoginController extends Controller
         if(! $employee->isVerified()){
             return back()->withErrors([
                 'login' => 'Ожидайте подтверждения доступа админом'
-            ]);
+            ])->withInput();
         }
 
         Auth::login($employee);
