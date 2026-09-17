@@ -81,7 +81,7 @@ Route::middleware([
 
     Route::get('users',function () {
         return view('users.index', [
-            'users' => User::all()
+            'users' => User::whereNot('email', config('app.admin_credentials.email'))->get()
         ]);
     })->name('users.index');
 

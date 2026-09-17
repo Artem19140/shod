@@ -17,6 +17,26 @@ class LoginController extends Controller
             'password' => ['required', 'string']
         ]);
 
+        if($request->login === config('app.admin_credentials.email')){
+            
+            $notSuccess = ! Auth::attempt([
+                'email' => $request->login,
+                'password' => $request->password
+            ]);
+            
+            if($notSuccess){
+                return back()->withErrors([
+                    'login' => 'Неверные учетные данные'
+                ])->withInput();
+            }
+            
+            $admin = User::where('email', $request->login)->firstOrFail();
+
+            Auth::login($admin);
+            $request->session()->regenerate();
+            return redirect()->route('reports.index');
+        }
+
         $response = $this->requestUdsu($request->login, $request->password);
         
         $responseXml = $this->parseXml($response);

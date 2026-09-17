@@ -18,7 +18,7 @@ class EnsureUserVerificated
         if(! $request->user()->isVerified()){
             abort(404);
         }
-        
+
         return $next($request);
     }
 }

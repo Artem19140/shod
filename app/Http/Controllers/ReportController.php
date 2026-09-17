@@ -46,7 +46,7 @@ class ReportController extends Controller
             'reports' => $reports,
             'organizations' => Organization::whereNull('deleted_at')->get(),
             'types' => Report::types(),
-            'users' => User::all()
+            'users' => User::whereNot('email', config('app.admin_credentials.email'))->get()
         ]);
     }
 

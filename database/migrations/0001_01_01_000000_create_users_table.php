@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable()->default(null)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable()->default(null);
-            $table->integer('udsu_id');
+            $table->integer('udsu_id')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
