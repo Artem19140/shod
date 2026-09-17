@@ -8,6 +8,7 @@ use App\Models\Organization;
 use App\Models\Report;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -81,11 +82,17 @@ Route::middleware([
 
     Route::get('users',function () {
         return view('users.index', [
-            'users' => User::whereNot('email', config('app.admin_credentials.email'))->get()
+            'users' => User::whereNotNull('udsu_id')->get()
         ]);
     })->name('users.index');
 
     Route::patch('users/{user}/verification', function (User $user) {
+        if($user->id === auth()->user()->id){
+            Log::warning('try to change verification for himself', [
+                'user_id' => $user->id
+            ]);
+            return redirect()->route('users.index');
+        }   
         $user->update([
             'is_verified' => ! $user->is_verified
         ]);

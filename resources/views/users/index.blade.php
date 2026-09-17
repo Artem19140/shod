@@ -44,6 +44,7 @@ $headers = [
                             </td>
 
                             <td class="px-4 py-4 font-medium text-gray-900">
+                                @if ($user->id !== auth()->user()->id)
                                 <form
                                     method="POST"
                                     action="{{ route('users.verification', ['user' => $user]) }}"
@@ -71,6 +72,7 @@ $headers = [
                                         </div>
                                     </label>
                                 </form>
+                                @endif
                             </td>
 
                             <td class="px-4 py-4 font-medium text-gray-900">
@@ -83,7 +85,7 @@ $headers = [
                 </tbody>  
             </table>
             @if (count($users ?? []) === 0)
-                <div class="text-center mt-8">Отчеты не найдены.</div>
+                <div class="text-center mt-8">Сотрудники не найдены.</div>
             @endif
         </div>
         

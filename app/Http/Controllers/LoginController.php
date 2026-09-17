@@ -109,13 +109,18 @@ class LoginController extends Controller
             return $user;
         }
         
-        $user = User::create([
-            "surname" => $employee->f,
-            'name' => $employee->i,
-            'patronymic' => $employee->o ?? null,
-            'udsu_id' => (int)$employee->pers_id,
-            'is_verified' => false
-        ]);
+        $user = User::updateOrCreate(
+            [
+                'udsu_id' => (int)$employee->pers_id,
+            ],
+            [
+                "surname" => $employee->f,
+                'name' => $employee->i,
+                'patronymic' => $employee->o ?? null,
+                'udsu_id' => (int)$employee->pers_id,
+                'is_verified' => false
+            ]
+        );
 
         return $user;
     }
